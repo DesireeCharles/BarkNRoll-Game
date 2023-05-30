@@ -8,15 +8,17 @@ vector<string> CommandWords::validCommands;
 CommandWords::CommandWords() {
     // Populate the vector if we haven't already.
     if (validCommands.empty()) {
-        validCommands.push_back("\n up \n");
-        validCommands.push_back("quit \n");
+        validCommands.push_back("\n start \n");
+        validCommands.push_back("exit \n");
         validCommands.push_back("commands \n");
         validCommands.push_back("map \n");
         validCommands.push_back("yes \n");
         validCommands.push_back("no \n");
+        validCommands.push_back("up \n");
         validCommands.push_back("down \n");
         validCommands.push_back("left \n");
         validCommands.push_back("right \n");
+        validCommands.push_back("drop \n");
 
     }
 }

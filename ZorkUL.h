@@ -16,7 +16,6 @@ private:
     Room *currentRoom;
     string nextRoom;
     void createRooms();
-    //	void goRoom(Command command);
     string goRoom(Command command);
     void createItems();
     void displayItems();
@@ -40,8 +39,6 @@ public:
     string getInventory();
     Room *start, *Gloomweavers,*Safe1, *Embermaws,*Safe2, *Wispfiends,*Safe3, *Mindflayers,*Safe4, *Chronomancers,*Safe5, *Boss;
     vector <Item> inventory;
-    //    std::string getCurrentRoom() const;
-//    string location();
 
 };
 

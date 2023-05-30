@@ -45,7 +45,7 @@ void ZorkUL::createRooms()  {
 
 
 
-    //                      (N, E, S, W)  up, right, down, left
+    //(N, E, S, W) ->  (up, right, down, left)
     start->setExits(NULL, Gloomweavers, NULL, NULL);
     Gloomweavers->setExits(Safe1, Embermaws, NULL, start);
     Safe1->setExits(NULL, NULL, Gloomweavers, NULL);
@@ -64,36 +64,6 @@ void ZorkUL::createRooms()  {
 
 
 
-/**
- *  Main play routine.  Loops until end of play.
- */
-//string ZorkUL::play() {
-//    // Enter the main command loop.  Here we repeatedly read commands and
-//    // execute them until the ZorkUL game is over.
-
-//    bool finished = true;
-//    while (finished) {
-//        // Create pointer to command and give it a command.
-//        Command* command = parser.getCommand();
-//        // Pass dereferenced command and check for end of game.
-//        finished = processCommand(*command);
-//        // Free the memory allocated by "parser.getCommand()"
-//        //   with ("return new Command(...)")
-//        delete command;
-//    }
-//    cout << endl;
-//    return "game ended";
-//}
-
-//void ZorkUL::play() {
-//    while (true) {
-//        // Check if current room has any items
-//        for (Item* item : currentRoom->getItems()) {
-//            inventory.push_back(item);
-//        }
-//        currentRoom->clearItems()
-
-//}
 
 std::string ZorkUL::printWelcome() {
     return getIntro();
@@ -148,44 +118,11 @@ std::string ZorkUL::processCommand(Command command) {
         return nextRoom;
     }
 
-//    else if (commandWord.compare("take") == 0)
-//    {
-//        if (!command.hasSecondWord())
-//            return "incomplete input";
-
-//        else {
-//            //            cout << "you're trying to take " + command.getSecondWord() << endl;
-//            int location = currentRoom->isItemInRoom(command.getSecondWord());
-//            if (location < 0)
-//                return "item is not in room";
-//            else {
-//                cout << "item is in room" << endl;
-////                this->inventory.push_back(Item("bone"));
-////                cout << this->inventory.at(0).getShortDescription();
-//                cout << "index number " << location << endl;
-//                cout << endl;
-
-//                return currentRoom->longDescription();
-//            }
-//        }
-//    }
 
     else if (commandWord.compare("put") == 0)
     {
 
     }
-    /*
-    {
-    if (!command.hasSecondWord()) {
-        cout << "incomplete input"<< endl;
-        }
-        else
-            if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
-            itemsInRoom.push_Back;
-        }
-    }
-*/
     else if (commandWord.compare("quit") == 0) {
         if (command.hasSecondWord())
             return "overdefined input";
@@ -238,7 +175,7 @@ string ZorkUL::go(string direction) {
         return currentRoom->longDescription();
     }
 }
-
+//
 string ZorkUL::getCurrentRoomDesc(){ //current location
     return currentRoom->longDescription() + "\n";
 }

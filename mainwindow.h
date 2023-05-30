@@ -36,27 +36,21 @@ private:
     void appendTextToConsoleGUI(const QString& text);
     void appendTextToinventory(const QString& text);
     string nextRoom;
-    void findImageForNextRoom(string nextRoom);
+    void findForNextRoom(string nextRoom);
     bool gameIsStarted;
     void setCoverImage();
     void displayLocationDesc();
 
-private slots: //receiving signals
+private slots:
     void onStartGameButtonPressed();
-    void onInfoButtonPressed();
+    void oncommandsButtonPressed();
     void onMapButtonPressed();
-   // void onQuitButtonPressed();
-    //    void setCoverImage();
-    //void onTakeButtonPressed();
-    //void onPutButtonPressed();
-    void onNorthButtonPressed();
-    void onEastButtonPressed();
-    void onSouthButtonPressed();
-    void onWestButtonPressed();
-
+    void onupButtonPressed();
+    void onrightButtonPressed();
+    void ondownButtonPressed();
+    void onleftButtonPressed();
     void on_exit_button_pressed();
     void on_textEdit_textChanged();
-
     void on_yes_pressed();
     void on_no_pressed();
     void on_drop_clicked();

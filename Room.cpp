@@ -19,7 +19,7 @@ void Room::setExits(Room *up, Room *right, Room *down, Room *left) {
 }
 
 string Room::shortDescription() {
-    //    return "Current location = " + name;
+
     return name;
 }
 

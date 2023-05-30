@@ -17,19 +17,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->image->setPixmap(initialImage);
     gameIsStarted = false;
 
-
     connect(ui->textEdit, &QTextEdit::textChanged, this, &MainWindow::on_textEdit_textChanged);
 
-    //what's sending the signal, what's receiving the signal
     QObject::connect(ui->startGame, &QPushButton::pressed, this, &MainWindow::onStartGameButtonPressed);
-    QObject::connect(ui->infoButton, &QPushButton::pressed, this, &MainWindow::onInfoButtonPressed);
+
+    QObject::connect(ui->commandsButton, &QPushButton::pressed, this, &MainWindow::oncommandsButtonPressed);
+
     QObject::connect(ui->mapButton, &QPushButton::pressed, this, &MainWindow::onMapButtonPressed);
-    QObject::connect(ui->northButton, &QPushButton::pressed, this, &MainWindow::onNorthButtonPressed);
-    QObject::connect(ui->eastButton, &QPushButton::pressed, this, &MainWindow::onEastButtonPressed);
-    QObject::connect(ui->southButton, &QPushButton::pressed, this, &MainWindow::onSouthButtonPressed);
-    QObject::connect(ui->westButton, &QPushButton::pressed, this, &MainWindow::onWestButtonPressed);
-    //QObject::connect(ui->takeButton, &QPushButton::pressed, this, &MainWindow::onTakeButtonPressed);
-  //  QObject::connect(ui->putButton, &QPushButton::pressed, this, &MainWindow::onPutButtonPressed);
+
+    QObject::connect(ui->upButton, &QPushButton::pressed, this, &MainWindow::onupButtonPressed);
+
+    QObject::connect(ui->rightButton, &QPushButton::pressed, this, &MainWindow::onrightButtonPressed);
+
+    QObject::connect(ui->downButton, &QPushButton::pressed, this, &MainWindow::ondownButtonPressed);
+
+    QObject::connect(ui->leftButton, &QPushButton::pressed, this, &MainWindow::onleftButtonPressed);
+
 }
 
 MainWindow::~MainWindow()
@@ -46,18 +49,7 @@ void MainWindow::appendTextToConsoleGUI(const QString& text){
     consoleGUI->append(text);
 }
 
-//void MainWindow::appendtextToinventory(const QString& text){
-//    inventory->addItem(text);
-//    void ZorkUL::play() {
-//        while (true) {
-//            // Check if current room has any items
-//            for (Item* item : currentRoom->getItems()) {
-//                inventory.push_back(item);
-//            }
-//            currentRoom->clearItems()
 
-//        }
-//}
 
 void MainWindow::appendTextToinventory(const QString& text){
     inventory->append(text);
@@ -69,14 +61,14 @@ void MainWindow::appendTextToinventory(const QString& text){
 
 void MainWindow::onStartGameButtonPressed(){
     gameIsStarted = true;
-    findImageForNextRoom("start");
+    findForNextRoom("start");
     QString qstr1 = QString::fromStdString(game.printWelcome());
     appendTextToConsoleGUI(qstr1);
     displayLocationDesc();
 
 }
 
-void MainWindow::onInfoButtonPressed() {
+void MainWindow::oncommandsButtonPressed() {
     if(gameIsStarted){
         Command command("info", "");
         std::string helpText = game.processCommand(command);
@@ -108,7 +100,14 @@ void MainWindow::on_exit_button_pressed()
 void MainWindow::on_textEdit_textChanged()
 {
     QString input = ui->textEdit->toPlainText().trimmed().toLower();
-    if (input == "exit")
+    if (input == "start"){
+        gameIsStarted = true;
+        findForNextRoom("start");
+        QString qstr1 = QString::fromStdString(game.printWelcome());
+        appendTextToConsoleGUI(qstr1);
+        displayLocationDesc();
+    }
+    else if (input == "exit")
     {
         qApp->quit();
     }
@@ -132,7 +131,7 @@ void MainWindow::on_textEdit_textChanged()
     {
         Command command("go", "up");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
         ui->textEdit->clear();
 
@@ -142,7 +141,7 @@ void MainWindow::on_textEdit_textChanged()
     {
         Command command("go", "right");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
         ui->textEdit->clear();
     }
@@ -150,7 +149,7 @@ void MainWindow::on_textEdit_textChanged()
     {
         Command command("go", "down");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
         ui->textEdit->clear();
     }
@@ -158,7 +157,7 @@ void MainWindow::on_textEdit_textChanged()
     {
         Command command("go", "left");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
         ui->textEdit->clear();
     }
@@ -166,42 +165,42 @@ void MainWindow::on_textEdit_textChanged()
         if(gameIsStarted && game.checkRoom() == "Gloomweavers" ){
             appendTextToConsole( "Well done! You've dispelled the dark magic misconception about dogs.\n"
                                 " Instead of weaving webs, they're busy perfecting their skills in tail-wagging and belly rubs.");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
-            ui->map->setPixmap(image); // no space t put another image display, so display in the map box
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happydog.png");
+            ui->map->setPixmap(image); // no space to put another image display, so display in the map box
             ui->textEdit->clear();
         }
         else if(gameIsStarted && game.checkRoom() == "Embermaws" ){
             appendTextToConsole("You did it! Raccoons don't leave fiery trails but they do leave a trail of mischief and trash can raiding.\n"
                                 " Keep your snacks secure!");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happyraccoon.png");
             ui->map->setPixmap(image);
             ui->textEdit->clear();
         }
         else if(gameIsStarted && game.checkRoom() == "Wispfiends" ){
             appendTextToConsole("Moo-velous! You've discovered that cows are not ethereal phasers.\n"
                                 " They'd rather focus on grazing grass, producing milk, and maybe even learning a few dance moves.");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happycow.png");
             ui->map->setPixmap(image);
             ui->textEdit->clear();
         }
         else if(gameIsStarted && game.checkRoom() == "Mindflayers" ){
             appendTextToConsole("Bravo! You've seen through the psychic illusion surrounding pandas. \n"
                                 "Their true power lies in capturing hearts worldwide with their cuddly cuteness and bamboo-munching skills.");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happypanda.png");
             ui->map->setPixmap(image);
             ui->textEdit->clear();
         }
         else if(gameIsStarted && game.checkRoom() == "Chronomancers" ){
             appendTextToConsole("Congratulations! You've correctly uncovered the time-manipulating secrets of cats.\n"
                                 " Now they can teach you the art of napping through the ages!");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happycat.png");
             ui->map->setPixmap(image);
             ui->textEdit->clear();
         }
         else if(gameIsStarted && game.checkRoom() == "Boss" ){
             appendTextToConsole("Incredible! Hamsters aren't reality-bending cosmic beings. \n"
                                 "Instead, they excel at running on wheels and stuffing their cheeks with food. The cutest little adventurers!");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happyhamster.png");
             ui->map->setPixmap(image);
             ui->textEdit->clear();
         }
@@ -213,9 +212,10 @@ void MainWindow::on_textEdit_textChanged()
                                 "Time to retreat and study up on doggy myths!\n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/saddog.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
         else if(gameIsStarted && game.checkRoom() == "Embermaws" ){
@@ -224,9 +224,10 @@ void MainWindow::on_textEdit_textChanged()
                                 "Keep your cool next time!\n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadraccoon.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
         else if(gameIsStarted && game.checkRoom() == "Wispfiends" ){
@@ -235,9 +236,10 @@ void MainWindow::on_textEdit_textChanged()
                                 " Keep chasing those elusive answers!\n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadcow.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
         else if(gameIsStarted && game.checkRoom() == "Mindflayers" ){
@@ -246,9 +248,10 @@ void MainWindow::on_textEdit_textChanged()
                                 " The panda triumphs, but don't lose hope!\n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadpanda.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
         else if(gameIsStarted && game.checkRoom() == "Chronomancers" ){
@@ -257,9 +260,10 @@ void MainWindow::on_textEdit_textChanged()
                                 " Better luck next time! \n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadcat.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
         else if(gameIsStarted && game.checkRoom() == "Boss" ){
@@ -268,9 +272,10 @@ void MainWindow::on_textEdit_textChanged()
                                 "Keep exploring the mysteries of hamsters!\n"
                                 "__________________________________________ \n"
                                 "Press 'Start game' button, to start again");
-            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+            QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadhamster.png");
             ui->map->setPixmap(image);
             gameIsStarted = false;
+            ui->textEdit->clear();
 
         }
     }
@@ -282,90 +287,45 @@ void MainWindow::on_textEdit_textChanged()
     else return;
 }
 
-//void MainWindow::onTakeButtonPressed() {
-//    if (gameIsStarted) {
-//        QString selectedItem = list1->currentText();
-//        std::string item = selectedItem.toStdString();
-//        Command command("take", item);
-//        std::string result = game.processCommand(command);
-//        QString qstr = QString::fromStdString(result);
-//        appendTextToConsole(qstr);
 
-//        // Add the item to the inventory
-//        inventory->addItem(selectedItem);
-
-//        // Clear the combobox selection
-//        list1->setCurrentIndex(0);
-//    }
-//    else return;
-//}
-
-
-//void MainWindow::fillTakeComboBox(){
-//    string returned = game.getCurrentRoomItems();
-//    if(returned == "no items in room"){
-//        return;
-//    }
-//    else{
-//        QString qstr = QString::fromStdString(returned);
-//        QStringList itemList = qstr.split(" ", Qt::SkipEmptyParts);
-//        list1->addItems(itemList);
-//    }
-//}
-
-//void MainWindow::fillPutComboBox(){
-//    list2->addItem("Hello");
-//    list2->addItem("World");
-//}
-
-//void MainWindow::onPutButtonPressed() {
-//    if(gameIsStarted){
-//        Command command("put", "");
-//        std::string item = game.processCommand(command);
-//        QString qstr = QString::fromStdString(item);
-//        appendTextToConsole(qstr);
-//    }
-//    else return;
-//}
-
-void MainWindow::onNorthButtonPressed() { // up
+void MainWindow::onupButtonPressed() {
     if(gameIsStarted){
         Command command("go", "up");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
 
     }
     else return;
 }
 
-void MainWindow::onEastButtonPressed() { //right
+void MainWindow::onrightButtonPressed() {
     if(gameIsStarted){
         Command command("go", "right");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
 
     }
     else return;
 }
 
-void MainWindow::onSouthButtonPressed() { // down
+void MainWindow::ondownButtonPressed() {
     if(gameIsStarted){
         Command command("go", "down");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
 
     }
     else return;
 }
 
-void MainWindow::onWestButtonPressed() { //left
+void MainWindow::onleftButtonPressed() {
     if(gameIsStarted){
         Command command("go", "left");
         nextRoom = game.processCommand(command);
-        findImageForNextRoom(nextRoom);
+        findForNextRoom(nextRoom);
         displayLocationDesc();
 
     }
@@ -382,7 +342,7 @@ void MainWindow::setCoverImage(){
     ui->image->setPixmap(image);
 }
 
-void MainWindow::findImageForNextRoom(string room){
+void MainWindow::findForNextRoom(string room){
     if(room == "start"){
         QPixmap nextImage("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
         ui->image->setPixmap(nextImage);
@@ -414,13 +374,6 @@ void MainWindow::findImageForNextRoom(string room){
     else if(room == "Safe1"){
         QPixmap nextImage("C:/Users/desir/C++ Project in QT/BarkNRollGame/Safe.png");
         ui->image->setPixmap(nextImage);
-        //appendTextToConsole(game.getCurrentRoomItems());
-        //appendTextToConsole("Bone");
-//        appendTextToinventory("Bone");
-       // ui->textinventory->setText(QString::fromStdString(game.Safe1->displayItem()));
-//        appendTextToConsole("item in the room = null");
-//        appendTextToConsole("item was added is in the inventory.");
-        //game.Safe1->displayItem();
         game.inventory.push_back(game.Safe1->getItem());
         ui->textinventory->setText(QString::fromStdString(game.getInventory()));
 
@@ -431,67 +384,76 @@ void MainWindow::findImageForNextRoom(string room){
         game.inventory.push_back(game.Safe2->getItem());
         ui->textinventory->setText(QString::fromStdString(game.getInventory()));
 
+
     }
     else if(room == "Safe3"){
         QPixmap nextImage("C:/Users/desir/C++ Project in QT/BarkNRollGame/Safe.png");
         ui->image->setPixmap(nextImage);
+        game.inventory.push_back(game.Safe3->getItem());
+        ui->textinventory->setText(QString::fromStdString(game.getInventory()));
     }
     else if(room == "Safe4"){
         QPixmap nextImage("C:/Users/desir/C++ Project in QT/BarkNRollGame/Safe.png");
         ui->image->setPixmap(nextImage);
+        game.inventory.push_back(game.Safe4->getItem());
+        ui->textinventory->setText(QString::fromStdString(game.getInventory()));
     }
     else if(room == "Safe5"){
         QPixmap nextImage("C:/Users/desir/C++ Project in QT/BarkNRollGame/Safe.png");
         ui->image->setPixmap(nextImage);
+        game.inventory.push_back(game.Safe5->getItem());
+        ui->textinventory->setText(QString::fromStdString(game.getInventory()));
     }
     else{return ;}
 }
 
 
 
-void MainWindow::on_yes_pressed() //CHANGE IMAGE
+void MainWindow::on_yes_pressed()
 {
     if(gameIsStarted && game.checkRoom() == "Gloomweavers" ){
         appendTextToConsole( "Well done! You've dispelled the dark magic misconception about dogs.\n"
                             " Instead of weaving webs, they're busy perfecting their skills in tail-wagging and belly rubs.");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happydog.png");//happy dog image
         ui->map->setPixmap(image); // no space t put another image display, so display in the map box
 
     }
     else if(gameIsStarted && game.checkRoom() == "Embermaws" ){
         appendTextToConsole("You did it! Raccoons don't leave fiery trails but they do leave a trail of mischief and trash can raiding.\n"
                             " Keep your snacks secure!");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happyraccoon.png"); //happy raccoon image
         ui->map->setPixmap(image);
 
     }
     else if(gameIsStarted && game.checkRoom() == "Wispfiends" ){
         appendTextToConsole("Moo-velous! You've discovered that cows are not ethereal phasers.\n"
                             " They'd rather focus on grazing grass, producing milk, and maybe even learning a few dance moves.");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happycow.png");// happycow image
         ui->map->setPixmap(image);
 
     }
     else if(gameIsStarted && game.checkRoom() == "Mindflayers" ){
         appendTextToConsole("Bravo! You've seen through the psychic illusion surrounding pandas. \n"
                             "Their true power lies in capturing hearts worldwide with their cuddly cuteness and bamboo-munching skills.");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happypanda.png"); //happy panda image
         ui->map->setPixmap(image);
 
     }
     else if(gameIsStarted && game.checkRoom() == "Chronomancers" ){
         appendTextToConsole("Congratulations! You've correctly uncovered the time-manipulating secrets of cats.\n"
                             " Now they can teach you the art of napping through the ages!");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happycat.png"); // happycat image
         ui->map->setPixmap(image);
 
     }
     else if(gameIsStarted && game.checkRoom() == "Boss" ){
         appendTextToConsole("Incredible! Hamsters aren't reality-bending cosmic beings. \n"
-                            "Instead, they excel at running on wheels and stuffing their cheeks with food. The cutest little adventurers!");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+                            "Instead, they excel at running on wheels and stuffing their cheeks with food. The cutest little adventurers!\n"
+                            "__________________________________________ \n"
+                             "Press 'Start game' button, to start again");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/happyhamster.png"); // well done image, start again + happy hamster
         ui->map->setPixmap(image);
-
+        gameIsStarted = false;
     }
     else return;
 }
@@ -504,7 +466,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             "Time to retreat and study up on doggy myths!\n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/saddog.png"); //saddog image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
@@ -515,7 +477,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             "Keep your cool next time!\n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadraccoon.png"); //sad raccoon image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
@@ -526,7 +488,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             " Keep chasing those elusive answers!\n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadcow.png"); //sad cow image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
@@ -537,7 +499,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             " The panda triumphs, but don't lose hope!\n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadpanda.png"); //sad panda image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
@@ -548,7 +510,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             " Better luck next time! \n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadcat.png"); //sad cat image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
@@ -559,7 +521,7 @@ void MainWindow::on_no_pressed() //CHANGE IMAGE
                             "Keep exploring the mysteries of hamsters!\n"
                             "__________________________________________ \n"
                             "Press 'Start game' button, to start again");
-        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/athena.png");
+        QPixmap image("C:/Users/desir/C++ Project in QT/BarkNRollGame/sadhamster.png"); //sad hamster image
         ui->map->setPixmap(image);
         gameIsStarted = false;
 
