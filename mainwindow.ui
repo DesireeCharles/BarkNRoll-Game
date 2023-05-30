@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1374</width>
+    <height>821</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextBrowser" name="textConsole">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>200</y>
+      <width>451</width>
+      <height>141</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="takeButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>630</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Take</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>450</y>
+      <width>101</width>
+      <height>91</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eastButton">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>500</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>right</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="putButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>680</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>put</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="westButton">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>500</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>left</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mapButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Map</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="northButton">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>470</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>up</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textConsoleGUI">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>30</y>
+      <width>411</width>
+      <height>141</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="map">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>360</y>
+      <width>421</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>491</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>images</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="southButton">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>530</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>down</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="startGame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Game</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="infoButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Commands</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>340</y>
+      <width>37</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Map </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>180</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Updates:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>10</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Instructions: </string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textinventory">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>450</y>
+      <width>101</width>
+      <height>91</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>430</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Input Text</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>430</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inventory</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit_button">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="yes">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>470</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Yes</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="no">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>500</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>No</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="drop">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>550</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>drop</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1374</width>
+     <height>17</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
