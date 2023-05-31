@@ -59,7 +59,7 @@ void MainWindow::appendTextToinventory(const QString& text){
 
 
 
-void MainWindow::onStartGameButtonPressed(){
+void MainWindow::onStartGameButtonPressed(){ //start the game button
     gameIsStarted = true;
     findForNextRoom("start");
     QString qstr1 = QString::fromStdString(game.printWelcome());
