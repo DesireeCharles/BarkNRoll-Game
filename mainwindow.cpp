@@ -52,7 +52,7 @@ void MainWindow::appendTextToConsoleGUI(const QString& text){
 
 
 void MainWindow::appendTextToinventory(const QString& text){
-    inventory->append(text);
+    inventory->append(text); //inventory
 
 }
 
