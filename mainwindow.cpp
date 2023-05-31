@@ -41,12 +41,12 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::appendTextToConsole(const QString& text){
-    console->append(text);
-    //    consoleGUI->append(text);
+    console->append(text); //updates
+
 }
 
 void MainWindow::appendTextToConsoleGUI(const QString& text){
-    consoleGUI->append(text);
+    consoleGUI->append(text); //instructions
 }
 
 
@@ -333,7 +333,7 @@ void MainWindow::onleftButtonPressed() {
 }
 
 void MainWindow::displayLocationDesc(){
-    QString qstr = QString::fromStdString(game.getCurrentRoomDesc() + "items in room = " + game.getCurrentRoomItems() + "\n" + game.getCurrentRoomExits() + "\n");
+    QString qstr = QString::fromStdString(game.getCurrentRoomDesc() + "items in room:  " + game.getCurrentRoomItems() + "\n" + game.getCurrentRoomExits() + "\n");
     appendTextToConsole(qstr);
 }
 

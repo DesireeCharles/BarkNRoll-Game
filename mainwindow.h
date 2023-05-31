@@ -41,7 +41,7 @@ private:
     void setCoverImage();
     void displayLocationDesc();
 
-private slots:
+private slots: // handle the events triggered
     void onStartGameButtonPressed();
     void oncommandsButtonPressed();
     void onMapButtonPressed();

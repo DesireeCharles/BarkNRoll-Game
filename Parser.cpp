@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser() {
+Parser::Parser() { //parse user input
     commands = new CommandWords();
 }
 

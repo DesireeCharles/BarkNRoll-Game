@@ -4,6 +4,8 @@
 using namespace std;
 #include "ZorkUL.h"
 
+
+
 ZorkUL::ZorkUL() {
     createRooms();
 }
@@ -139,6 +141,13 @@ std::string ZorkUL::processCommand(Command command) {
 std::string ZorkUL::printHelp() {
     return parser.showCommands();
 }
+
+int animals = 0; // Global variable
+
+void animalsrescued() {
+    std::cout << "you have rescuded: " << animals << std::endl;
+}
+
 
 string ZorkUL::goRoom(Command command) {
     if (!command.hasSecondWord()) {

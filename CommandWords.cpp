@@ -47,6 +47,6 @@ std::string CommandWords::showAll() {
     {
         output += validCommands[i] + " ";
     }
-    return "valid commands are: " + output;
+    return "The commands you can use are: \n " + output;
 }
 

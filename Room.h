@@ -16,6 +16,9 @@ private:
     map<string, Room*> exits;
     vector <Item> itemsInRoom;
 
+protected:
+    Room();
+    Room(const Room* room);
 
 public:
     int numberOfItems();
