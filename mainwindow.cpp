@@ -68,7 +68,7 @@ void MainWindow::onStartGameButtonPressed(){ //start the game button
 
 }
 
-void MainWindow::oncommandsButtonPressed() {
+void MainWindow::oncommandsButtonPressed() { //Show commands
     if(gameIsStarted){
         Command command("info", "");
         std::string helpText = game.processCommand(command);
